@@ -63,7 +63,7 @@ class FormtoolsTest {
         assertFalse(Formtools.isOnlyText("=1234"));
         assertFalse(Formtools.isOnlyText("=1234+(34*7)"));
         assertFalse(Formtools.isOnlyText("=-30"));
-//        assertFalse(Formtools.isOnlyText("=A1+S10"));
+        assertFalse(Formtools.isOnlyText("=A1+S10"));
 
         }
 
@@ -82,16 +82,12 @@ class FormtoolsTest {
                 assertEquals(21.0, Formtools.computeFormula("=(3*(5+2))", sheet));
                 assertEquals(16.0, Formtools.computeFormula("=((2+2)*(3+1))", sheet));
 
-//                Test cell references
-                //sheet.set(0, 0, "10");  // Set A0 to 10
-                //sheet.set(0, 1, "5");   // Set A1 to 5
-                //assertEquals(10.0, Formtools.computeFormula("A0", sheet));
-                //assertEquals(15.0, Formtools.computeFormula("A0+A1", sheet));
-                //assertEquals(50.0, Formtools.computeFormula("A0*A1", sheet));
+                sheet.set(0, 0, "10");  // Set A0 to 10
+                sheet.set(0, 1, "5");   // Set A1 to 5
+                assertEquals(10.0, Formtools.computeFormula("A0", sheet));
+                assertEquals(15.0, Formtools.computeFormula("A0+A1", sheet));
+                assertEquals(50.0, Formtools.computeFormula("A0*A1", sheet));
 
-                // Test complex formulas with cells and operations
-                //assertEquals(30.0, Formtools.computeFormula("(A0*2)+10", sheet));
-                //assertEquals(45.0, Formtools.computeFormula("(A0+A1)*3", sheet));
 
 
     }

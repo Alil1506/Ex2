@@ -5,8 +5,10 @@ public class CellEntry  implements Index2D {
     private String entry;
 
     public CellEntry(String input) {
+
         this.entry = input;
     }
+
     @Override
     public boolean isValid() {
         if (entry == null || entry.length() < 2) {
@@ -24,7 +26,6 @@ public class CellEntry  implements Index2D {
             return false;
         }
 
-        // Check if remaining characters form a valid row number
         try {
             int row = Integer.parseInt(entry.substring(1));
             return row >= 0 && row < Ex2Utils.HEIGHT;
@@ -33,30 +34,35 @@ public class CellEntry  implements Index2D {
         }
     }
 
-        @Override
-        public int getX () {
-            if (!isValid()) {
-                return Ex2Utils.ERR;
-            }
-            String column = entry.substring(0, 1).toUpperCase();
-            for (int i = 0; i < Ex2Utils.ABC.length; i++) {
-                if (Ex2Utils.ABC[i].equals(column)) {
-                    return i;
-                }
-            }
+    @Override
+    public int getX() {
+        if (!isValid()) {
             return Ex2Utils.ERR;
         }
-
-        @Override
-        public int getY () {
-            if (!isValid()) {
-                return Ex2Utils.ERR;
+        String column = entry.substring(0, 1).toUpperCase();
+        for (int i = 0; i < Ex2Utils.ABC.length; i++) {
+            if (Ex2Utils.ABC[i].equals(column)) {
+                return i;
             }
-            try {
-                return Integer.parseInt(entry.substring(1));
-            } catch (NumberFormatException e) {
-                return Ex2Utils.ERR;
-            }
+        }
+        return Ex2Utils.ERR;
+    }
 
+    @Override
+    public int getY() {
+        if (!isValid()) {
+            return Ex2Utils.ERR;
+        }
+        try {
+            return Integer.parseInt(entry.substring(1));
+        } catch (NumberFormatException e) {
+            return Ex2Utils.ERR;
         }
     }
+    @Override
+    public String toString() {
+        return this.entry;
+    }
+}
+
+
